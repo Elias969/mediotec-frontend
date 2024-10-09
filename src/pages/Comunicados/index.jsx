@@ -17,7 +17,7 @@ const ComunicadosScreen = () => {
   // Função para carregar comunicados da API
   const fetchComunicados = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/comunicados'); // Rota correta da API
+      const response = await fetch('https://mediotec-backend.onrender.com/api/comunicados'); // Rota correta da API
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -71,7 +71,7 @@ const ComunicadosScreen = () => {
     console.log('Dados do comunicado:', newComunicado);
 
     try {
-      const response = await fetch('http://localhost:8080/api/comunicados', { // Rota correta
+      const response = await fetch('https://mediotec-backend.onrender.com/api/comunicados', { // Rota correta
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

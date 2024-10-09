@@ -18,7 +18,7 @@ const Disciplina = () => {
   // Função para carregar disciplinas da API
   const fetchDisciplinas = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/disciplinas'); // Use a rota correta
+      const response = await fetch('https://mediotec-backend.onrender.com/api/disciplinas'); // Use a rota correta
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -73,7 +73,7 @@ const Disciplina = () => {
     console.log('Dados da disciplina:', newDisciplina);
 
     try {
-      const response = await fetch('http://localhost:8080/api/disciplinas', { // Use a rota correta
+      const response = await fetch('https://mediotec-backend.onrender.com/api/disciplinas', { // Use a rota correta
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

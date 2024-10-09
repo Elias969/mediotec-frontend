@@ -18,7 +18,7 @@ const Turmas = () => {
   // Função para carregar as turmas da API
   const fetchTurmas = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/turmas'); // Rota correta da API
+      const response = await fetch('https://mediotec-backend.onrender.com/api/turmas'); // Rota correta da API
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -90,7 +90,7 @@ const Turmas = () => {
   const handleAddTurma = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/api/turmas', { // Rota correta da API
+      const response = await fetch('https://mediotec-backend.onrender.com/api/turmas', { // Rota correta da API
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const Turmas = () => {
   const handleUpdateTurma = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8080/api/turmas/${selectedTurma.id}`, { // Rota correta da API
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/turmas/${selectedTurma.id}`, { // Rota correta da API
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ const Turmas = () => {
 
   const handleDeleteTurma = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/turmas/${selectedTurma.id}`, { // Rota correta da API
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/turmas/${selectedTurma.id}`, { // Rota correta da API
         method: 'DELETE',
       });
 

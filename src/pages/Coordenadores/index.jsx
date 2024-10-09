@@ -21,7 +21,7 @@ const CoordenadoresIndex = () => {
   // Função para carregar coordenadores da API
   const fetchCoordenadores = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/coordenadores'); // Use a rota correta
+      const response = await fetch('https://mediotec-backend.onrender.com/api/coordenadores'); // Use a rota correta
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -79,7 +79,7 @@ const CoordenadoresIndex = () => {
     console.log('Dados do coordenador:', newCoordinator);
 
     try {
-      const response = await fetch('http://localhost:8080/api/coordenadores', { // Use a rota correta
+      const response = await fetch('https://mediotec-backend.onrender.com/api/coordenadores', { // Use a rota correta
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

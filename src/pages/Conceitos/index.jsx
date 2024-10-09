@@ -17,7 +17,7 @@ const Conceitos = () => {
   // Função para carregar conceitos da API
   const fetchConceitos = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/conceitos'); // Rota correta da API
+      const response = await fetch('https://mediotec-backend.onrender.com/api/conceitos'); // Rota correta da API
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -71,7 +71,7 @@ const Conceitos = () => {
     console.log('Dados do conceito:', newConceito);
 
     try {
-      const response = await fetch('http://localhost:8080/api/conceitos', { // Rota correta da API
+      const response = await fetch('https://mediotec-backend.onrender.com/api/conceitos', { // Rota correta da API
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

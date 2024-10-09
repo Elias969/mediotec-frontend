@@ -21,7 +21,7 @@ const Index = () => {
   // Função para carregar professores da API
   const fetchTeachers = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/professores');
+      const response = await fetch('https://mediotec-backend.onrender.com/api/professores');
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -86,7 +86,7 @@ const Index = () => {
 
   const handleAddTeacher = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/professores', {
+      const response = await fetch('https://mediotec-backend.onrender.com/api/professores', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ const Index = () => {
 
   const handleEditTeacher = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/professores/${selectedTeacher.id}`, {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/professores/${selectedTeacher.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -134,7 +134,7 @@ const Index = () => {
 
   const handleRemoveTeacher = async (teacherId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/professores/${teacherId}`, {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/professores/${teacherId}`, {
         method: 'DELETE'
       });
 

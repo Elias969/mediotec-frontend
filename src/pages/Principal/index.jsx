@@ -25,7 +25,7 @@ const Index = () => {
   // Função para carregar alunos da API
   const fetchStudents = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/alunos');
+      const response = await fetch('https://mediotec-backend.onrender.com/api/alunos');
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -114,7 +114,7 @@ const Index = () => {
 
     console.log('Dados do novo aluno:', studentToAdd); // Verifique os dados antes de enviar
     try {
-      const response = await fetch('http://localhost:8080/api/alunos', {
+      const response = await fetch('https://mediotec-backend.onrender.com/api/alunos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ const Index = () => {
 
   const handleEditStudent = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/alunos/${selectedStudent.id}`, {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/alunos/${selectedStudent.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -162,7 +162,7 @@ const Index = () => {
 
   const handleRemoveStudent = async (studentId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/alunos/${studentId}`, {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/alunos/${studentId}`, {
         method: 'DELETE'
       });
 
@@ -180,7 +180,7 @@ const Index = () => {
 
   const fetchSubjects = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/disciplinas'); // URL da sua API de disciplinas
+      const response = await fetch('https://mediotec-backend.onrender.com/api/disciplinas'); // URL da sua API de disciplinas
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -193,7 +193,7 @@ const Index = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/turmas'); // URL da sua API de turmas
+      const response = await fetch('https://mediotec-backend.onrender.com/api/turmas'); // URL da sua API de turmas
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
