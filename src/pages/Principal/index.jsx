@@ -1,15 +1,59 @@
-  import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
+const Index = () => {
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [classes, setClasses] = useState([]);
+  const [subjects, setSubjects] = useState([]);
 
-  const Index = () => {
-    const [selectedStudent, setSelectedStudent] = useState(null);
-    const [classes, setClasses] = useState([]);
-    const [subjects, setSubjects] = useState([]);
-    
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [newStudent, setNewStudent] = useState({
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [newStudent, setNewStudent] = useState({
+    nome: '',
+    dataNasc: '',
+    telefone: '',
+    turma: '',
+    email: '',
+    matricula: '',
+    status: 'Ativo',
+    endereco: '',
+    disciplinas: []
+  });
+
+  const [students, setStudents] = useState([]);
+
+  // Função para carregar alunos da API
+  const fetchStudents = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/alunos');
+      if (!response.ok) {
+        throw new Error('Erro na resposta da API');
+      }
+      const data = await response.json();
+      if (data.length > 0) {
+        setStudents(data);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar os alunos:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const openStudentModal = (student) => {
+    setSelectedStudent(student);
+    setIsModalOpen(true);
+  };
+
+  const closeStudentModal = () => {
+    setSelectedStudent(null);
+    setIsModalOpen(false);
+  };
+
+  const openAddModal = () => {
+    setNewStudent({
       nome: '',
       dataNasc: '',
       telefone: '',
@@ -17,190 +61,154 @@
       email: '',
       matricula: '',
       status: 'Ativo',
-      disciplinas: [],
-      endereco: ''
+      endereco: '',
+      disciplinas: []
     });
+    setIsAddModalOpen(true);
+  };
 
-    const [students, setStudents] = useState([]);
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
 
-    // Função para carregar alunos da API
-    const fetchStudents = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/alunos');
-        if (!response.ok) {
-          throw new Error('Erro na resposta da API');
-        }
-        const data = await response.json();
-        if (data.length > 0) {
-          setStudents(data);
-        }
-      } catch (error) {
-        console.error('Erro ao carregar os alunos:', error);
-      }
-    };
+  const openEditModal = (student) => {
+    setSelectedStudent(student);
+    setNewStudent(student);
+    setIsEditModalOpen(true);
+  };
 
-    useEffect(() => {
-      fetchStudents();
-    }, []);
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
 
-    const openStudentModal = (student) => {
-      setSelectedStudent(student);
-      setIsModalOpen(true);
-    };
+  const handleInputChange = (e) => {
+    const { name, value, checked } = e.target;
 
-    const closeStudentModal = () => {
-      setSelectedStudent(null);
-      setIsModalOpen(false);
-    };
+    if (name === "disciplinas") {
+      let updatedDisciplinas = [...newStudent.disciplinas];
 
-    const openAddModal = () => {
-      setNewStudent({
-        nome: '',
-        dataNasc: '',
-        telefone: '',
-        turma: '',
-        email: '',
-        matricula: '',
-        status: 'Ativo',
-        disciplinas: '',
-        endereco: ''
-      });
-      setIsAddModalOpen(true);
-    };
-
-    const closeAddModal = () => {
-      setIsAddModalOpen(false);
-    };
-
-    const openEditModal = (student) => {
-      setSelectedStudent(student);
-      setNewStudent(student);
-      setIsEditModalOpen(true);
-    };
-
-    const closeEditModal = () => {
-      setIsEditModalOpen(false);
-    };
-
-    const handleInputChange = (e) => {
-      const { name, value, type, checked } = e.target;
-    
-      
-      if (name === "disciplinas") {
-        let updatedDisciplinas = [...newStudent.disciplinas];
-        
-        if (checked) {
-          // Adicionar a disciplina ao array se estiver marcada
-          updatedDisciplinas.push(value);
-        } else {
-          // Remover a disciplina do array se desmarcada
-          updatedDisciplinas = updatedDisciplinas.filter(
-            (disciplina) => disciplina !== value
-          );
-        }
-    
-        setNewStudent({ ...newStudent, disciplinas: updatedDisciplinas });
+      if (checked) {
+        // Adicionar a disciplina ao array se estiver marcada
+        updatedDisciplinas.push(parseInt(value)); // Converta para int
       } else {
-       
-        setNewStudent({ ...newStudent, [name]: value });
-      }
-    };
-    const handleAddStudent = async () => {
-      console.log('Dados do novo aluno:', newStudent); // Verifique os dados antes de enviar
-      try {
-        const response = await fetch('http://localhost:8080/api/alunos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(newStudent)
-        });
-    
-        if (!response.ok) {
-          throw new Error('Erro ao adicionar aluno');
-        }
-    
-        const addedStudent = await response.json();
-        setStudents((prevStudents) => [...prevStudents, addedStudent]);
-        closeAddModal();
-      } catch (error) {
-        console.error('Erro ao adicionar aluno:', error);
-      }
-    };
-
-    const handleEditStudent = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/alunos/${selectedStudent.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(newStudent)
-        });
-
-        if (!response.ok) {
-          throw new Error('Erro ao editar aluno');
-        }
-
-        const updatedStudent = await response.json();
-        setStudents((prevStudents) =>
-          prevStudents.map((student) =>
-            student.id === updatedStudent.id ? updatedStudent : student
-          )
+        // Remover a disciplina do array se desmarcada
+        updatedDisciplinas = updatedDisciplinas.filter(
+          (disciplina) => disciplina !== parseInt(value) // Converta para int
         );
-        closeEditModal();
-      } catch (error) {
-        console.error('Erro ao editar aluno:', error);
       }
+
+      setNewStudent({ ...newStudent, disciplinas: updatedDisciplinas });
+    } else {
+      setNewStudent({ ...newStudent, [name]: value });
+    }
+  };
+
+  const handleAddStudent = async () => {
+    // Transforme as disciplinas para o formato esperado pelo backend
+    const formattedDisciplines = newStudent.disciplinas.map(id => ({ id }));
+
+    const studentToAdd = {
+      ...newStudent,
+      disciplinas: formattedDisciplines // Use o novo formato aqui
     };
 
-    const handleRemoveStudent = async (studentId) => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/alunos/${studentId}`, {
-          method: 'DELETE'
-        });
+    console.log('Dados do novo aluno:', studentToAdd); // Verifique os dados antes de enviar
+    try {
+      const response = await fetch('http://localhost:8080/api/alunos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(studentToAdd) // Envie o novo objeto formatado
+      });
 
-        if (!response.ok) {
-          throw new Error('Erro ao remover aluno');
-        }
+      if (!response.ok) {
+        throw new Error('Erro ao adicionar aluno');
+      }
 
-        setStudents((prevStudents) =>
-          prevStudents.filter((student) => student.id !== studentId)
-        );
-      } catch (error) {
-        console.error('Erro ao remover aluno:', error);
+      const addedStudent = await response.json();
+      setStudents((prevStudents) => [...prevStudents, addedStudent]);
+      closeAddModal();
+    } catch (error) {
+      console.error('Erro ao adicionar aluno:', error);
+    }
+  };
+
+  const handleEditStudent = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/alunos/${selectedStudent.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newStudent)
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao editar aluno');
       }
-    };
-    const fetchSubjects = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/disciplinas'); // URL da sua API de disciplinas
-        if (!response.ok) {
-          throw new Error('Erro na resposta da API');
-        }
-        const data = await response.json();
-        setSubjects(data);
-      } catch (error) {
-        console.error('Erro ao carregar as disciplinas:', error);
+
+      const updatedStudent = await response.json();
+      setStudents((prevStudents) =>
+        prevStudents.map((student) =>
+          student.id === updatedStudent.id ? updatedStudent : student
+        )
+      );
+      closeEditModal();
+    } catch (error) {
+      console.error('Erro ao editar aluno:', error);
+    }
+  };
+
+  const handleRemoveStudent = async (studentId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/alunos/${studentId}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao remover aluno');
       }
-    };
-    const fetchClasses = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/turmas'); // URL da sua API de turmas
-        if (!response.ok) {
-          throw new Error('Erro na resposta da API');
-        }
-        const data = await response.json();
-        setClasses(data);
-      } catch (error) {
-        console.error('Erro ao carregar as turmas:', error);
+
+      setStudents((prevStudents) =>
+        prevStudents.filter((student) => student.id !== studentId)
+      );
+    } catch (error) {
+      console.error('Erro ao remover aluno:', error);
+    }
+  };
+
+  const fetchSubjects = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/disciplinas'); // URL da sua API de disciplinas
+      if (!response.ok) {
+        throw new Error('Erro na resposta da API');
       }
-    };
-    
-    useEffect(() => {
-      fetchStudents();
-      fetchSubjects();
-      fetchClasses(); // Chama a função para carregar turmas
-    }, []);
+      const data = await response.json();
+      setSubjects(data);
+    } catch (error) {
+      console.error('Erro ao carregar as disciplinas:', error);
+    }
+  };
+
+  const fetchClasses = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/turmas'); // URL da sua API de turmas
+      if (!response.ok) {
+        throw new Error('Erro na resposta da API');
+      }
+      const data = await response.json();
+      setClasses(data);
+    } catch (error) {
+      console.error('Erro ao carregar as turmas:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudents();
+    fetchSubjects();
+    fetchClasses(); // Chama a função para carregar turmas
+  }, []);
 
     return (
       <div className="w-full h-screen flex bg-gray-900">
@@ -403,12 +411,12 @@
           <input
             type="checkbox"
             name="disciplinas"
-            value={subject.id}
+            value={subject.id} // Isso deve ser o ID da disciplina
             checked={newStudent.disciplinas.includes(subject.id)}
             onChange={handleInputChange}
             className="mr-2"
           />
-          {subject.nome} 
+          {subject.nome}
         </label>
       </div>
     ))}
@@ -454,7 +462,7 @@
         <option value="Inativo">Inativo</option>
     </select>
   
-    <textarea name="disciplina" value={newStudent.disciplinas} onChange={handleInputChange} placeholder="Disciplina" className="border p-2 w-full mb-2" />
+    <textarea name="disciplinas" value={newStudent.disciplinas} onChange={handleInputChange} placeholder="Disciplina" className="border p-2 w-full mb-2" />
     <textarea name="endereco" value={newStudent.endereco} onChange={handleInputChange} placeholder="Endereço" className="border p-2 w-full mb-2" />
     <button type="submit" className="text-white px-4 py-2 rounded bg-blue-500">Salvar</button>
     <button onClick={closeEditModal} className="text-white px-4 py-2 rounded bg-red-500 ml-2">Fechar</button>
@@ -466,22 +474,35 @@
         
             {/* Modal de Informações do Aluno */}
             {isModalOpen && selectedStudent && (
-              <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-                <div className="bg-white p-8 rounded shadow-lg">
-                  <h2 className="text-xl mb-4">Informações do Aluno</h2>
-                  <p><strong>Nome:</strong> {selectedStudent.nome}</p>
-                  <p><strong>Data de Nascimento:</strong> {selectedStudent.dataNasc}</p>
-                  <p><strong>Matrícula:</strong> {selectedStudent.matricula}</p>
-                  <p><strong>Telefone:</strong> {selectedStudent.telefone}</p>
-                  <p><strong>Email:</strong> {selectedStudent.email}</p>
-                  <p><strong>Endereço:</strong> {selectedStudent.endereco}</p>
-                  <p><strong>Disciplinas:</strong> {selectedStudent.disciplinas}</p>
-                  <button onClick={closeStudentModal} className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-300 mt-4">
-                    Fechar
-                  </button>
-                </div>
-              </div>
-            )}
+  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div className="bg-white p-8 rounded shadow-lg">
+      <h2 className="text-xl mb-4">Informações do Aluno</h2>
+      <p><strong>Nome:</strong> {selectedStudent.nome}</p>
+      <p><strong>Data de Nascimento:</strong> {selectedStudent.dataNasc}</p>
+      <p><strong>Matrícula:</strong> {selectedStudent.matricula}</p>
+      <p><strong>Telefone:</strong> {selectedStudent.telefone}</p>
+      <p><strong>Email:</strong> {selectedStudent.email}</p>
+      <p><strong>Endereço:</strong> {selectedStudent.endereco}</p>
+      <p><strong>Disciplinas:</strong></p>
+      <ul>
+        {Array.isArray(selectedStudent.disciplinas) ? (
+          selectedStudent.disciplinas.map((disciplina, index) => (
+            <li key={index}>
+              {disciplina.nome ? disciplina.nome : disciplina} {/* Se disciplina for um objeto */}
+            </li>
+          ))
+        ) : (
+          <p>{selectedStudent.disciplinas?.nome || selectedStudent.disciplinas}</p> // Caso não seja um array
+        )}
+      </ul>
+      <button onClick={closeStudentModal} className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-300 mt-4">
+        Fechar
+      </button>
+    </div>
+  </div>
+)}
+
+
           </main>
         </div>
       </div>
