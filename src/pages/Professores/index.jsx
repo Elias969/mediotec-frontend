@@ -163,11 +163,11 @@ const Index = () => {
             />
           </div>
           <ul className="mx-auto mt-10">
-          <li><a href="https://mediotec-backend.onrender.com/Coordenadores" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded"> Coordenadores</a></li>
-            <li><a href="https://mediotec-backend.onrender.com/professores" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded"> Professores</a></li>
+          <li><a href="https://mediotec.netlify.app/Coordenadores" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded"> Coordenadores</a></li>
+            <li><a href="https://mediotec.netlify.app/professores" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded"> Professores</a></li>
             
             
-            <li><a href="https://mediotec-backend.onrender.com" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded">Sair</a></li>
+            <li><a href="https://mediotec.netlify.app" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded">Sair</a></li>
           </ul>
           <img
       src="images/mediotec-mobile.png"

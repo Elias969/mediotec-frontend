@@ -227,7 +227,7 @@ const Index = () => {
       
       <li>
         <a
-          href="https://mediotec-backend.onrender.com/Principal"
+          href="https://mediotec.netlify.app/Principal"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Alunos
@@ -235,7 +235,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="https://mediotec-backend.onrender.com/Turmas"
+          href="https://mediotec.netlify.app/Turmas"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Turmas
@@ -243,7 +243,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="https://mediotec-backend.onrender.com/Conceitos"
+          href="https://mediotec.netlify.app/Conceitos"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Conceitos
@@ -251,7 +251,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="https://mediotec-backend.onrender.com/Disciplinas"
+          href="https://mediotec.netlify.app/Disciplinas"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Disciplinas
@@ -259,7 +259,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="https://mediotec-backend.onrender.com/Comunicados"
+          href="https://mediotec.netlify.app/Comunicados"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Comunicados
@@ -267,7 +267,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="https://mediotec-backend.onrender.com"
+          href="https://mediotec.netlify.app"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Sair
