@@ -227,7 +227,7 @@ const Index = () => {
       
       <li>
         <a
-          href="http://localhost:5173/Principal"
+          href="https://mediotec-backend.onrender.com/Principal"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Alunos
@@ -235,7 +235,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="http://localhost:5173/Turmas"
+          href="https://mediotec-backend.onrender.com/Turmas"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Turmas
@@ -243,7 +243,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="http://localhost:5173/Conceitos"
+          href="https://mediotec-backend.onrender.com/Conceitos"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Conceitos
@@ -251,7 +251,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="http://localhost:5173/Disciplinas"
+          href="https://mediotec-backend.onrender.com/Disciplinas"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Disciplinas
@@ -259,7 +259,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="http://localhost:5173/Comunicados"
+          href="https://mediotec-backend.onrender.com/Comunicados"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Comunicados
@@ -267,7 +267,7 @@ const Index = () => {
       </li>
       <li>
         <a
-          href="http://localhost:5173"
+          href="https://mediotec-backend.onrender.com"
           className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded transition duration-300 ease-in-out"
         >
           Sair
