@@ -4,6 +4,7 @@ const Disciplina = () => {
   const [selectedDisciplina, setSelectedDisciplina] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [newDisciplina, setNewDisciplina] = useState({
     nome: '',
     codigo: '',
@@ -12,10 +13,8 @@ const Disciplina = () => {
     status: 'Ativo',
   });
 
-  // Estado inicial para as disciplinas
   const [disciplinas, setDisciplinas] = useState([]);
 
-  // Função para carregar disciplinas da API
   const fetchDisciplinas = async () => {
     try {
       const response = await fetch('https://mediotec-backend.onrender.com/api/disciplinas'); // Use a rota correta
@@ -29,7 +28,6 @@ const Disciplina = () => {
     }
   };
 
-  // Carrega as disciplinas quando o componente é montado
   useEffect(() => {
     fetchDisciplinas();
   }, []);
@@ -59,6 +57,17 @@ const Disciplina = () => {
     setIsAddModalOpen(false);
   };
 
+  const openEditModal = (disciplina) => {
+    setSelectedDisciplina(disciplina);
+    setNewDisciplina(disciplina); // Preenche o formulário com os dados existentes
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setSelectedDisciplina(null);
+    setIsEditModalOpen(false);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewDisciplina((prevDisciplina) => ({
@@ -70,10 +79,8 @@ const Disciplina = () => {
   const handleAddDisciplina = async (e) => {
     e.preventDefault();
 
-    console.log('Dados da disciplina:', newDisciplina);
-
     try {
-      const response = await fetch('https://mediotec-backend.onrender.com/api/disciplinas', { // Use a rota correta
+      const response = await fetch('https://mediotec-backend.onrender.com/api/disciplinas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,36 +99,66 @@ const Disciplina = () => {
     }
   };
 
+  const handleEditDisciplina = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/disciplinas/${selectedDisciplina.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newDisciplina),
+      });
+
+      if (response.ok) {
+        await fetchDisciplinas(); // Atualiza a lista de disciplinas
+        closeEditModal();
+      } else {
+        console.error('Erro ao editar disciplina');
+      }
+    } catch (error) {
+      console.error('Erro ao editar disciplina:', error);
+    }
+  };
+
+  const handleRemoveDisciplina = async (id) => {
+    try {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/disciplinas/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        await fetchDisciplinas(); // Atualiza a lista de disciplinas
+      } else {
+        console.error('Erro ao remover disciplina');
+      }
+    } catch (error) {
+      console.error('Erro ao remover disciplina:', error);
+    }
+  };
+
   return (
     <div className="w-full h-screen flex bg-gray-900">
       <div className="flex w-full h-full bg-white rounded-lg overflow-hidden">
-        {/* Barra lateral */}
         <nav className="w-64 p-5" style={{ backgroundColor: '#201AE8' }}>
-  
-        <div className="w-64 text-white" style={{ backgroundColor: '#201AE8' }}>
-        <img
-  src="https://st4.depositphotos.com/11574170/25191/v/450/depositphotos_251916955-stock-illustration-user-glyph-color-icon.jpg"
-  alt="Perfil"
-  className="w-32 h-32 rounded-full ml-10"
-/>
+          <div className="w-64 text-white" style={{ backgroundColor: '#201AE8' }}>
+            <img
+              src="https://st4.depositphotos.com/11574170/25191/v/450/depositphotos_251916955-stock-illustration-user-glyph-color-icon.jpg"
+              alt="Perfil"
+              className="w-32 h-32 rounded-full ml-10"
+            />
           </div>
           <ul className="mx-auto mt-10">
-        
-            <li><a href="https://mediotec.netlify.app/Principal" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded"> Alunos</a></li>
-            <li><a href="https://mediotec.netlify.app/Turmas" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded"> Turmas</a></li>
+            <li><a href="https://mediotec.netlify.app/Principal" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded">Alunos</a></li>
+            <li><a href="https://mediotec.netlify.app/Turmas" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded">Turmas</a></li>
             <li><a href="https://mediotec.netlify.app/Conceitos" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded">Conceitos</a></li>
-            <li><a href="https://mediotec.netlify.app/Disciplinas" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded"> Disciplinas</a></li>
-            <li><a href="https://mediotec.netlify.app/Comunicados" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded"> Comunicados</a></li>
+            <li><a href="https://mediotec.netlify.app/Disciplinas" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded">Disciplinas</a></li>
+            <li><a href="https://mediotec.netlify.app/Comunicados" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded">Comunicados</a></li>
             <li><a href="https://mediotec.netlify.app" className="text-white hover:bg-white hover:text-black px-4 py-2 block rounded">Sair</a></li>
           </ul>
-          <img
-      src="images/mediotec-mobile.png"
-      alt="mediotec"
-      className="w-32 h-16  ml-10"
-    />
-
+          <img src="images/mediotec-mobile.png" alt="mediotec" className="w-32 h-16 ml-10" />
         </nav>
-        {/* Conteúdo principal */}
         <main className="flex-1 p-8 overflow-y-auto" style={{ backgroundColor: '#D9E0F2' }}>
           <header className="flex justify-between items-center mb-6">
             <h1 className="text-black text-2xl">Gerenciamento de Disciplinas</h1>
@@ -131,30 +168,31 @@ const Disciplina = () => {
           </header>
 
           <div className="overflow-x-auto">
-  <table className="w-full table-auto bg-white rounded-lg">
-    <thead className="bg-blue-800 text-white">
-              <tr>
-                <th className="p-4 text-left">Nome</th>
-                <th className="p-4 text-left">Código</th>
-                <th className="p-4 text-left">Professor</th>
-                <th className="p-4 text-left">Horário</th>
-              </tr>
-            </thead>
-            <tbody>
-              {disciplinas.map((disciplina, index) => (
-                <tr
-                  key={index}
-                  className={`cursor-pointer ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}
-                  onClick={() => openModal(disciplina)}
-                >
-                  <td className="p-4">{disciplina.nome}</td>
-                  <td className="p-4">{disciplina.codigo}</td>
-                  <td className="p-4">{disciplina.professor}</td>
-                  <td className="p-4">{disciplina.horario}</td>
+            <table className="w-full table-auto bg-white rounded-lg">
+              <thead className="bg-blue-800 text-white">
+                <tr>
+                  <th className="p-4 text-left">Nome</th>
+                  <th className="p-4 text-left">Código</th>
+                  <th className="p-4 text-left">Professor</th>
+                  <th className="p-4 text-left">Horário</th>
+                  <th className="p-4 text-left">Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {disciplinas.map((disciplina, index) => (
+                  <tr key={index} className={`cursor-pointer ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                    <td className="p-4">{disciplina.nome}</td>
+                    <td className="p-4">{disciplina.codigo}</td>
+                    <td className="p-4">{disciplina.professor}</td>
+                    <td className="p-4">{disciplina.horario}</td>
+                    <td className="p-4">
+                      <button onClick={() => openEditModal(disciplina)} className="bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-300 mr-2">Editar</button>
+                      <button onClick={() => handleRemoveDisciplina(disciplina.id)} className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-400">Remover</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           {/* Modal */}
           {isModalOpen && (
@@ -212,6 +250,55 @@ const Disciplina = () => {
               </div>
             </div>
           )}
+
+            {/* Modal de edição */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="bg-white p-4 rounded-lg w-full max-w-md max-h-screen overflow-y-auto relative">
+            <button onClick={closeEditModal} className="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            <h2 className="text-2xl mb-4">Editar Disciplina</h2>
+            <form onSubmit={handleEditDisciplina} className="space-y-4">
+              <input
+                type="text"
+                name="nome"
+                value={selectedDisciplina.nome}
+                onChange={handleInputChange}
+                placeholder="Nome"
+                className="border border-gray-300 p-2 rounded w-full"
+                required
+              />
+              <input
+                type="text"
+                name="codigo"
+                value={selectedDisciplina.codigo}
+                onChange={handleInputChange}
+                placeholder="Código"
+                className="border border-gray-300 p-2 rounded w-full"
+                required
+              />
+              <input
+                type="text"
+                name="professor"
+                value={selectedDisciplina.professor}
+                onChange={handleInputChange}
+                placeholder="Professor"
+                className="border border-gray-300 p-2 rounded w-full"
+                required
+              />
+              <input
+                type="text"
+                name="horario"
+                value={selectedDisciplina.horario}
+                onChange={handleInputChange}
+                placeholder="Horário"
+                className="border border-gray-300 p-2 rounded w-full"
+                required
+              />
+              <button type="submit" className="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-300">Salvar Alterações</button>
+            </form>
+          </div>
+        </div>
+      )}
         </main>
       </div>
     </div>
