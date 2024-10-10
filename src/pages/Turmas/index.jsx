@@ -8,7 +8,7 @@ const Turmas = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newTurma, setNewTurma] = useState({
      nome: '',
-  professor: '',
+  nomeProfessor: '',
   periodo: '',
   numerodealunos: '', 
 });
@@ -47,7 +47,7 @@ const Turmas = () => {
   const openAddModal = () => {
     setNewTurma({
       nome: '',
-      professor: '',
+      nomeProfessor: '',
       alunos: [],
       periodo: ''
     });
@@ -299,7 +299,7 @@ const Turmas = () => {
                 <input
                   type="text"
                   name="professor"
-                  value={newTurma.professor}
+                  value={newTurma.nomeProfessor}
                   onChange={handleInputChange}
                   className="border p-2 w-full"
                   required
