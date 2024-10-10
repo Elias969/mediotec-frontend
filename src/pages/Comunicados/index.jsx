@@ -193,10 +193,10 @@ const ComunicadosScreen = () => {
                     <td className="p-4">{comunicado.dataPublicacao}</td>
                     <td className="p-4">{comunicado.status}</td>
                   <td className="p-4 flex space-x-4">
-                      <button onClick={() => openEditModal(comunicado)} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-400">
+                      <button onClick={() => openEditModal(comunicado)} className="bg-green-400 text-white px-4 py-2 rounded hover:bg-green-300">
                         Editar
                       </button>
-                      <button onClick={() => handleRemoveComunicado(comunicado.id)} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400">
+                      <button onClick={() => handleRemoveComunicado(comunicado.id)} className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-300">
                         Remover
                       </button>
                     </td>
