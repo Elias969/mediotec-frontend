@@ -165,8 +165,8 @@ const ComunicadosScreen = () => {
 
         </nav>
 
-        {/* Conteúdo principal */}
-        <main className="flex-1 p-8 overflow-y-auto" style={{ backgroundColor: '#D9E0F2' }}>
+          {/* Conteúdo principal */}
+          <main className="flex-1 p-8 overflow-y-auto" style={{ backgroundColor: '#D9E0F2' }}>
           <header className="flex justify-between items-center mb-6">
             <h1 className="text-black text-2xl">Gerenciamento de Comunicados</h1>
             <button onClick={openAddModal} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400">
@@ -175,26 +175,23 @@ const ComunicadosScreen = () => {
           </header>
 
           <div className="overflow-x-auto">
-  <table className="w-full table-auto bg-white rounded-lg">
-    <thead className="bg-blue-800 text-white">
-              <tr>
-                <th className="p-4 text-left">Título</th>
-                <th className="p-4 text-left">Descrição</th>
-                <th className="p-4 text-left">Data de Publicação</th>
-                <th className="p-4 text-left">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {comunicados.map((comunicado, index) => (
-                <tr
-                  key={index}
-                  className={`cursor-pointer ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}
-                  onClick={() => openModal(comunicado)}
-                >
-                  <td className="p-4">{comunicado.titulo}</td>
-                  <td className="p-4">{comunicado.descricao}</td>
-                  <td className="p-4">{comunicado.dataPublicacao}</td>
-                  <td className="p-4">{comunicado.status}</td>
+            <table className="w-full table-auto bg-white rounded-lg">
+              <thead className="bg-blue-800 text-white">
+                <tr>
+                  <th className="p-4 text-left">Título</th>
+                  <th className="p-4 text-left">Descrição</th>
+                  <th className="p-4 text-left">Data de Publicação</th>
+                  <th className="p-4 text-left">Status</th>
+                  <th className="p-4 text-left">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comunicados.map((comunicado, index) => (
+                  <tr key={index} className={`cursor-pointer ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                    <td className="p-4">{comunicado.titulo}</td>
+                    <td className="p-4">{comunicado.descricao}</td>
+                    <td className="p-4">{comunicado.dataPublicacao}</td>
+                    <td className="p-4">{comunicado.status}</td>
                   <td className="p-4 flex space-x-4">
                       <button onClick={() => openEditModal(comunicado)} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-400">
                         Editar

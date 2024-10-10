@@ -187,7 +187,7 @@ const Disciplina = () => {
                     <td className="p-4">{disciplina.horario}</td>
                     <td className="p-4">
                       <button onClick={() => openEditModal(disciplina)} className="bg-green-400 text-white px-2 py-1 rounded hover:bg-green-300 mr-2">Editar</button>
-                      <button onClick={() => handleRemoveDisciplina(disciplina.id)} className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-400">Remover</button>
+                      <button onClick={() => handleRemoveDisciplina(disciplina.id)} className="bg-red-400 text-white px-2 py-1 rounded hover:bg-red-300">Remover</button>
                     </td>
                   </tr>
                 ))}
