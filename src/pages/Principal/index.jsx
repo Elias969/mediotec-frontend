@@ -496,7 +496,7 @@ const Index = () => {
           <p>{selectedStudent.disciplinas?.nome || selectedStudent.disciplinas}</p> // Caso não seja um array
         )}
       </ul>
-      <p><strong>Turma:</strong> {selectedStudent.turma}</p>
+      <p><strong>Turma:</strong> {getClassNameById(selectedStudent.turma)}</p>
       <button onClick={closeStudentModal} className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-300 mt-4">
         Fechar
       </button>
