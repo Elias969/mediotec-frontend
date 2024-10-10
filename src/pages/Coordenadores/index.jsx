@@ -176,6 +176,7 @@ const CoordenadoresIndex = () => {
 
         </nav>
 
+        
         {/* Conteúdo principal */}
         <main className="flex-1 p-8 overflow-y-auto" style={{ backgroundColor: '#D9E0F2' }}>
           <header className="flex justify-between items-center mb-6">
@@ -186,26 +187,23 @@ const CoordenadoresIndex = () => {
           </header>
 
           <div className="overflow-x-auto">
-  <table className="w-full table-auto bg-white rounded-lg">
-    <thead className="bg-blue-800 text-white">
-              <tr>
-                <th className="p-4 text-left">Nome</th>
-                <th className="p-4 text-left">Código Coordenador</th>
-                <th className="p-4 text-left">Nível de Acesso</th>
-                <th className="p-4 text-left">Telefone</th>
-              </tr>
-            </thead>
-            <tbody>
-              {coordenadores.map((coordenador, index) => (
-                <tr
-                  key={index}
-                  className={`cursor-pointer ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}
-                  onClick={() => openModal(coordenador)}
-                >
-                  <td className="p-4">{coordenador.nome}</td>
-                  <td className="p-4">{coordenador.codigoCoordenador}</td>
-                  <td className="p-4">{coordenador.nivelAcesso}</td>
-                  <td className="p-4">{coordenador.telefone}</td>
+            <table className="w-full table-auto bg-white rounded-lg">
+              <thead className="bg-blue-800 text-white">
+                <tr>
+                  <th className="p-4 text-left">Nome</th>
+                  <th className="p-4 text-left">Código Coordenador</th>
+                  <th className="p-4 text-left">Nível de Acesso</th>
+                  <th className="p-4 text-left">Telefone</th>
+                  <th className="p-4 text-left">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {coordenadores.map((coordenador, index) => (
+                  <tr key={index} className={`cursor-pointer ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                    <td className="p-4">{coordenador.nome}</td>
+                    <td className="p-4">{coordenador.codigoCoordenador}</td>
+                    <td className="p-4">{coordenador.nivelAcesso}</td>
+                    <td className="p-4">{coordenador.telefone}</td>
                   <td className="p-4 flex space-x-2">
                       <button
                         onClick={() => openEditModal(coordenador)}
@@ -348,7 +346,7 @@ const CoordenadoresIndex = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400"
+                    className="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-300"
                   >
                     Salvar Alterações
                   </button>
