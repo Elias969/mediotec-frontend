@@ -48,8 +48,8 @@ const Turmas = () => {
     setNewTurma({
       nome: '',
       nomeProfessor: '',
-      alunos: [],
-      periodo: ''
+      periodo: '',
+      numerodealunos: '', 
     });
     setIsAddModalOpen(true);
   };
