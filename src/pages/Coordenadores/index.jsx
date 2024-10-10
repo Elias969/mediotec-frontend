@@ -4,6 +4,7 @@ const CoordenadoresIndex = () => {
   const [selectedCoordinator, setSelectedCoordinator] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [newCoordinator, setNewCoordinator] = useState({
     nome: '',
     codigoCoordenador: '',
@@ -65,6 +66,15 @@ const CoordenadoresIndex = () => {
     setIsAddModalOpen(false);
   };
 
+  const openEditModal = (coordenador) => {
+    setSelectedCoordinator(coordenador);
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewCoordinator((prevCoordinator) => ({
@@ -97,6 +107,46 @@ const CoordenadoresIndex = () => {
       console.error('Erro ao adicionar coordenador:', error);
     }
   };
+
+  const handleEditCoordinator = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/coordenadores/${selectedCoordinator._id}`, { // Use a rota correta
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedCoordinator),
+      });
+
+      if (response.ok) {
+        await fetchCoordenadores(); // Atualiza a lista de coordenadores
+        closeEditModal();
+      } else {
+        console.error('Erro ao editar coordenador');
+      }
+    } catch (error) {
+      console.error('Erro ao editar coordenador:', error);
+    }
+  };
+
+  const handleDeleteCoordinator = async (id) => {
+    try {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/coordenadores/${id}`, { // Use a rota correta
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        await fetchCoordenadores(); // Atualiza a lista de coordenadores
+      } else {
+        console.error('Erro ao remover coordenador');
+      }
+    } catch (error) {
+      console.error('Erro ao remover coordenador:', error);
+    }
+  };
+
 
   return (
     <div className="w-full h-screen flex bg-gray-900">
@@ -156,8 +206,22 @@ const CoordenadoresIndex = () => {
                   <td className="p-4">{coordenador.codigoCoordenador}</td>
                   <td className="p-4">{coordenador.nivelAcesso}</td>
                   <td className="p-4">{coordenador.telefone}</td>
-                </tr>
-              ))}
+                  <td className="p-4 flex space-x-2">
+                      <button
+                        onClick={() => openEditModal(coordenador)}
+                        className="bg-green-400 text-white px-4 py-2 rounded hover:bg-green-300"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        onClick={() => handleDeleteCoordinator(coordenador._id)}
+                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400"
+                      >
+                        Remover
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
           </div>
@@ -215,6 +279,78 @@ const CoordenadoresIndex = () => {
                     className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400"
                   >
                     Adicionar Coordenador
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+
+
+           {/* Modal de edição */}
+           {isEditModalOpen && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
+              <div className="bg-white p-8 rounded-lg w-96 relative">
+                <button onClick={closeEditModal} className="absolute top-4 right-4 text-xl font-bold">&times;</button>
+                <h2 className="text-2xl mb-4">Editar Coordenador</h2>
+                <form onSubmit={handleEditCoordinator}>
+                  <input
+                    type="text"
+                    name="nome"
+                    value={selectedCoordinator.nome}
+                    onChange={(e) =>
+                      setSelectedCoordinator((prev) => ({ ...prev, nome: e.target.value }))
+                    }
+                    placeholder="Nome"
+                    className="w-full p-2 border mb-4"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="codigoCoordenador"
+                    value={selectedCoordinator.codigoCoordenador}
+                    onChange={(e) =>
+                      setSelectedCoordinator((prev) => ({
+                        ...prev,
+                        codigoCoordenador: e.target.value,
+                      }))
+                    }
+                    placeholder="Código Coordenador"
+                    className="w-full p-2 border mb-4"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="nivelAcesso"
+                    value={selectedCoordinator.nivelAcesso}
+                    onChange={(e) =>
+                      setSelectedCoordinator((prev) => ({
+                        ...prev,
+                        nivelAcesso: e.target.value,
+                      }))
+                    }
+                    placeholder="Nível de Acesso"
+                    className="w-full p-2 border mb-4"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="telefone"
+                    value={selectedCoordinator.telefone}
+                    onChange={(e) =>
+                      setSelectedCoordinator((prev) => ({
+                        ...prev,
+                        telefone: e.target.value,
+                      }))
+                    }
+                    placeholder="Telefone"
+                    className="w-full p-2 border mb-4"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400"
+                  >
+                    Salvar Alterações
                   </button>
                 </form>
               </div>
