@@ -27,11 +27,7 @@ const Index = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#201AE8] relative">
-      <img
-        src="images/background.png" // Substitua por sua imagem de fundo
-        alt="Fundo"
-        className="absolute inset-0 w-full h-full object-cover opacity-30"
-      />
+      
       <div className="flex flex-row items-center justify-center w-full max-w-4xl space-x-8 z-10">
         <img
           src="images/mediotec-mobile.png"
