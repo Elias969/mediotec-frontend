@@ -213,7 +213,7 @@ const CoordenadoresIndex = () => {
                       </button>
                       <button
                         onClick={() => handleDeleteCoordinator(coordenador._id)}
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400"
+                        className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-300"
                       >
                         Remover
                       </button>
