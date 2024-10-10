@@ -122,7 +122,7 @@ const Disciplina = () => {
 
         </nav>
         {/* Conteúdo principal */}
-        <main className="flex-1 p-8" style={{ backgroundColor: '#D9E0F2' }}>
+        <main className="flex-1 p-8 overflow-y-auto" style={{ backgroundColor: '#D9E0F2' }}>
           <header className="flex justify-between items-center mb-6">
             <h1 className="text-black text-2xl">Gerenciamento de Disciplinas</h1>
             <button onClick={openAddModal} className="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-300">
@@ -130,8 +130,9 @@ const Disciplina = () => {
             </button>
           </header>
 
-          <table className="w-full table-auto bg-white rounded-lg overflow-hidden">
-            <thead className="bg-blue-800 text-white">
+          <div className="overflow-x-auto">
+  <table className="w-full table-auto bg-white rounded-lg">
+    <thead className="bg-blue-800 text-white">
               <tr>
                 <th className="p-4 text-left">Nome</th>
                 <th className="p-4 text-left">Código</th>
@@ -154,7 +155,7 @@ const Disciplina = () => {
               ))}
             </tbody>
           </table>
-
+          </div>
           {/* Modal */}
           {isModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
