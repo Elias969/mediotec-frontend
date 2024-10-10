@@ -10,7 +10,7 @@ const Turmas = () => {
      nome: '',
   professor: '',
   periodo: '',
-  numeroDeAlunos: '', 
+  numerodealunos: '', 
 });
 
   const [turmas, setTurmas] = useState([]);
@@ -202,11 +202,12 @@ const Turmas = () => {
                   key={index}
                   className={`cursor-pointer ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}
                 >
-                  <td className="p-4">{turma.nome}</td>
-                  <td className="p-4">{turma.professor}</td>
-                  <td className="p-4">{turma.periodo}</td>
-                  <td className="p-4">{turma.alunos.length}</td>
-                  <td className="p-4">
+                       <td className="p-4">{turma.nome}</td>
+      <td className="p-4">{turma.nomeProfessor}</td> 
+      <td className="p-4">{turma.periodo}</td>
+      <td className="p-4">{turma.numerodealunos}</td> 
+      <td className="p-4">
+
                     <button onClick={() => openUpdateModal(turma)} className="bg-green-400 text-white px-2 py-1 rounded hover:bg-green-300 mr-2">
                       Editar
                     </button>
@@ -241,7 +242,7 @@ const Turmas = () => {
                 <input
                   type="text"
                   name="professor"
-                  value={newTurma.professor}
+                  value={newTurma.nomeProfessor}
                   onChange={handleInputChange}
                   className="border p-2 w-full"
                   required
@@ -262,8 +263,8 @@ const Turmas = () => {
                 <label className="block mb-1">Número de Alunos</label>
                 <input
                   type="number"
-                  name="numeroDeAlunos"
-                  value={newTurma.numeroDeAlunos}
+                  name="numerodealunos"
+                  value={newTurma.numerodealunos}
                   onChange={handleInputChange}
                   className="border p-2 w-full"
                   required
@@ -319,8 +320,8 @@ const Turmas = () => {
                 <label className="block mb-1">Número de Alunos</label>
                 <input
                   type="number"
-                  name="numeroDeAlunos"
-                  value={newTurma.numeroDeAlunos}
+                  name="numerodealunos"
+                  value={newTurma.numerodealunos}
                   onChange={handleInputChange}
                   className="border p-2 w-full"
                   required
