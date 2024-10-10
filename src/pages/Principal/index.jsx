@@ -81,6 +81,11 @@ const Index = () => {
     setIsEditModalOpen(false);
   };
 
+  const getClassNameById = (id) => {
+    const turma = classes.find((classItem) => classItem.id === id);
+    return turma ? turma.nome : 'Turma não encontrada'; // Retorna o nome da turma
+  };
+
   const handleInputChange = (e) => {
     const { name, value, checked } = e.target;
 
