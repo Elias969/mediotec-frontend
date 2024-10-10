@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+
+
 const ComunicadosScreen = () => {
   const [selectedComunicado, setSelectedComunicado] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [newComunicado, setNewComunicado] = useState({
     titulo: '',
     descricao: '',
@@ -11,13 +13,11 @@ const ComunicadosScreen = () => {
     status: 'Publicado',
   });
 
-  // Estado inicial para os comunicados
   const [comunicados, setComunicados] = useState([]);
 
-  // Função para carregar comunicados da API
   const fetchComunicados = async () => {
     try {
-      const response = await fetch('https://mediotec-backend.onrender.com/api/comunicados'); // Rota correta da API
+      const response = await fetch('https://mediotec-backend.onrender.com/api/comunicados');
       if (!response.ok) {
         throw new Error('Erro na resposta da API');
       }
@@ -28,7 +28,6 @@ const ComunicadosScreen = () => {
     }
   };
 
-  // Carrega os comunicados quando o componente é montado
   useEffect(() => {
     fetchComunicados();
   }, []);
@@ -57,6 +56,16 @@ const ComunicadosScreen = () => {
     setIsAddModalOpen(false);
   };
 
+  const openEditModal = (comunicado) => {
+    setSelectedComunicado(comunicado);
+    setNewComunicado(comunicado);
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewComunicado((prevComunicado) => ({
@@ -67,11 +76,8 @@ const ComunicadosScreen = () => {
 
   const handleAddComunicado = async (e) => {
     e.preventDefault();
-
-    console.log('Dados do comunicado:', newComunicado);
-
     try {
-      const response = await fetch('https://mediotec-backend.onrender.com/api/comunicados', { // Rota correta
+      const response = await fetch('https://mediotec-backend.onrender.com/api/comunicados', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +86,7 @@ const ComunicadosScreen = () => {
       });
 
       if (response.ok) {
-        await fetchComunicados(); // Atualiza a lista de comunicados
+        await fetchComunicados();
         closeAddModal();
       } else {
         console.error('Erro ao adicionar comunicado');
@@ -90,6 +96,45 @@ const ComunicadosScreen = () => {
     }
   };
 
+  const handleEditComunicado = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/comunicados/${selectedComunicado.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newComunicado),
+      });
+
+      if (response.ok) {
+        await fetchComunicados();
+        closeEditModal();
+      } else {
+        console.error('Erro ao editar comunicado');
+      }
+    } catch (error) {
+      console.error('Erro ao editar comunicado:', error);
+    }
+  };
+
+  const handleRemoveComunicado = async (id) => {
+    try {
+      const response = await fetch(`https://mediotec-backend.onrender.com/api/comunicados/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        await fetchComunicados();
+      } else {
+        console.error('Erro ao remover comunicado');
+      }
+    } catch (error) {
+      console.error('Erro ao remover comunicado:', error);
+    }
+
+  };
+  
   return (
     <div className="w-full h-screen flex bg-gray-900">
       <div className="flex w-full h-full bg-white rounded-lg overflow-hidden">
@@ -150,8 +195,16 @@ const ComunicadosScreen = () => {
                   <td className="p-4">{comunicado.descricao}</td>
                   <td className="p-4">{comunicado.dataPublicacao}</td>
                   <td className="p-4">{comunicado.status}</td>
-                </tr>
-              ))}
+                  <td className="p-4 flex space-x-4">
+                      <button onClick={() => openEditModal(comunicado)} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-400">
+                        Editar
+                      </button>
+                      <button onClick={() => handleRemoveComunicado(comunicado.id)} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400">
+                        Remover
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
 </div>
@@ -206,6 +259,66 @@ const ComunicadosScreen = () => {
                     className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400"
                   >
                     Adicionar Comunicado
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+
+              {/* Modal de edição de comunicado */}
+              {isEditModalOpen && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
+              <div className="bg-white p-8 rounded-lg w-96 relative">
+                <button onClick={closeEditModal} className="absolute top-4 right-4 text-xl font-bold">&times;</button>
+                <h2 className="text-2xl mb-4">Editar Comunicado</h2>
+                <form onSubmit={handleEditComunicado}>
+                  <div className="mb-4">
+                    <label className="block mb-2">Título</label>
+                    <input
+                      type="text"
+                      name="titulo"
+                      value={newComunicado.titulo}
+                      onChange={handleInputChange}
+                      className="w-full p-2 border rounded"
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block mb-2">Descrição</label>
+                    <textarea
+                      name="descricao"
+                      value={newComunicado.descricao}
+                      onChange={handleInputChange}
+                      className="w-full p-2 border rounded"
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block mb-2">Data de Publicação</label>
+                    <input
+                      type="date"
+                      name="dataPublicacao"
+                      value={newComunicado.dataPublicacao}
+                      onChange={handleInputChange}
+                      className="w-full p-2 border rounded"
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block mb-2">Status</label>
+                    <select
+                      name="status"
+                      value={newComunicado.status}
+                      onChange={handleInputChange}
+                      className="w-full p-2 border rounded"
+                      required
+                    >
+                      <option value="Publicado">Publicado</option>
+                      <option value="Rascunho">Rascunho</option>
+                    </select>
+                  </div>
+                  <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-400">
+                    Editar
                   </button>
                 </form>
               </div>
