@@ -7,11 +7,11 @@ const Turmas = () => {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newTurma, setNewTurma] = useState({
-    nome: '',
-    professor: '',
-    alunos: [],
-    periodo: '',
-  });
+     nome: '',
+  professor: '',
+  periodo: '',
+  numeroDeAlunos: '', 
+});
 
   const [turmas, setTurmas] = useState([]);
 
@@ -219,39 +219,56 @@ const Turmas = () => {
             </tbody>
           </table>
           </div>
-          {/* Modal de Adicionar Turma */}
-          {isAddModalOpen && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-8 rounded-lg">
-                <h2 className="text-2xl mb-4">Adicionar Turma</h2>
-                <form onSubmit={handleAddTurma}>
-                  <input
-                    type="text"
-                    name="nome"
-                    placeholder="Nome da Turma"
-                    value={newTurma.nome}
-                    onChange={handleInputChange}
-                    className="border rounded w-full p-2 mb-4"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="professor"
-                    placeholder="Nome do Professor"
-                    value={newTurma.professor}
-                    onChange={handleInputChange}
-                    className="border rounded w-full p-2 mb-4"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="periodo"
-                    placeholder="Período"
-                    value={newTurma.periodo}
-                    onChange={handleInputChange}
-                    className="border rounded w-full p-2 mb-4"
-                    required
-                  />
+          {/* Modal Adicionar */}
+      {isAddModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white p-5 rounded shadow-lg">
+            <h2 className="text-xl mb-4">Adicionar Turma</h2>
+            <form onSubmit={handleAddTurma}>
+              <div className="mb-4">
+                <label className="block mb-1">Nome da Turma</label>
+                <input
+                  type="text"
+                  name="nome"
+                  value={newTurma.nome}
+                  onChange={handleInputChange}
+                  className="border p-2 w-full"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">Professor</label>
+                <input
+                  type="text"
+                  name="professor"
+                  value={newTurma.professor}
+                  onChange={handleInputChange}
+                  className="border p-2 w-full"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">Período</label>
+                <input
+                  type="text"
+                  name="periodo"
+                  value={newTurma.periodo}
+                  onChange={handleInputChange}
+                  className="border p-2 w-full"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">Número de Alunos</label>
+                <input
+                  type="number"
+                  name="numeroDeAlunos"
+                  value={newTurma.numeroDeAlunos}
+                  onChange={handleInputChange}
+                  className="border p-2 w-full"
+                  required
+                />
+              </div>
                   <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400">Adicionar</button>
                   <button type="button" onClick={closeAddModal} className="ml-2 bg-red-500 text-white px-4 py-2 rounded">Cancelar</button>
                 </form>
@@ -259,39 +276,56 @@ const Turmas = () => {
             </div>
           )}
 
-          {/* Modal de Atualizar Turma */}
-          {isUpdateModalOpen && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-8 rounded-lg">
-                <h2 className="text-2xl mb-4">Editar Turma</h2>
-                <form onSubmit={handleUpdateTurma}>
-                  <input
-                    type="text"
-                    name="nome"
-                    placeholder="Nome da Turma"
-                    value={newTurma.nome}
-                    onChange={handleInputChange}
-                    className="border rounded w-full p-2 mb-4"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="professor"
-                    placeholder="Nome do Professor"
-                    value={newTurma.professor}
-                    onChange={handleInputChange}
-                    className="border rounded w-full p-2 mb-4"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="periodo"
-                    placeholder="Período"
-                    value={newTurma.periodo}
-                    onChange={handleInputChange}
-                    className="border rounded w-full p-2 mb-4"
-                    required
-                  />
+           {/* Modal Atualizar */}
+      {isUpdateModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white p-5 rounded shadow-lg">
+            <h2 className="text-xl mb-4">Atualizar Turma</h2>
+            <form onSubmit={handleUpdateTurma}>
+              <div className="mb-4">
+                <label className="block mb-1">Nome da Turma</label>
+                <input
+                  type="text"
+                  name="nome"
+                  value={newTurma.nome}
+                  onChange={handleInputChange}
+                  className="border p-2 w-full"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">Professor</label>
+                <input
+                  type="text"
+                  name="professor"
+                  value={newTurma.professor}
+                  onChange={handleInputChange}
+                  className="border p-2 w-full"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">Período</label>
+                <input
+                  type="text"
+                  name="periodo"
+                  value={newTurma.periodo}
+                  onChange={handleInputChange}
+                  className="border p-2 w-full"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1">Número de Alunos</label>
+                <input
+                  type="number"
+                  name="numeroDeAlunos"
+                  value={newTurma.numeroDeAlunos}
+                  onChange={handleInputChange}
+                  className="border p-2 w-full"
+                  required
+                />
+              </div>
                   <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Salvar</button>
                   <button type="button" onClick={closeUpdateModal} className="ml-2 bg-red-500 text-white px-4 py-2 ">Cancelar</button>
                 </form>
