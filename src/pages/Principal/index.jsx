@@ -81,11 +81,6 @@ const Index = () => {
     setIsEditModalOpen(false);
   };
 
-  const getClassNameById = (id) => {
-    const turma = classes.find((classItem) => classItem.id === id);
-    return turma ? turma.nome : 'Turma não encontrada'; // Retorna o nome da turma
-  };
-
   const handleInputChange = (e) => {
     const { name, value, checked } = e.target;
 
@@ -501,7 +496,7 @@ const Index = () => {
           <p>{selectedStudent.disciplinas?.nome || selectedStudent.disciplinas}</p> // Caso não seja um array
         )}
       </ul>
-      <p><strong>Turma:</strong> {getClassNameById(selectedStudent.turma)}</p>
+      <p><strong>ID da Turma:</strong> {selectedStudent.turma}</p>
       <button onClick={closeStudentModal} className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-300 mt-4">
         Fechar
       </button>
