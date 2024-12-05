@@ -13,7 +13,96 @@ const Conceitos = () => {
   });
 
   // Estado inicial para os conceitos
-  const [conceitos, setConceitos] = useState([]);
+  const [conceitos, setConceitos] = useState([
+
+
+    {
+      aluno: 'João Silva',
+      disciplina: 'Matemática',
+      conceito: 'A',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'João Silva',
+      disciplina: 'Português',
+      conceito: 'B',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Maria Souza',
+      disciplina: 'História',
+      conceito: 'A',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Maria Souza',
+      disciplina: 'Geografia',
+      conceito: 'B',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Carlos Pereira',
+      disciplina: 'Física',
+      conceito: 'A',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Carlos Pereira',
+      disciplina: 'Química',
+      conceito: 'C',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Ana Oliveira',
+      disciplina: 'Biologia',
+      conceito: 'B',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Ana Oliveira',
+      disciplina: 'Inglês',
+      conceito: 'A',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Lucas Almeida',
+      disciplina: 'Matemática',
+      conceito: 'A',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Lucas Almeida',
+      disciplina: 'Educação Física',
+      conceito: 'B',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Beatriz Lima',
+      disciplina: 'Artes',
+      conceito: 'A',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Beatriz Lima',
+      disciplina: 'Geografia',
+      conceito: 'B',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Rafael Santos',
+      disciplina: 'História',
+      conceito: 'C',
+      semestre: '2024.1',
+    },
+    {
+      aluno: 'Rafael Santos',
+      disciplina: 'Sociologia',
+      conceito: 'B',
+      semestre: '2024.1',
+    },
+
+
+  ]);
 
   // Função para carregar conceitos da API
   const fetchConceitos = async () => {

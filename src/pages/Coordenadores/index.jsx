@@ -17,7 +17,62 @@ const CoordenadoresIndex = () => {
   });
 
   // Estado inicial para os coordenadores
-  const [coordenadores, setCoordenadores] = useState([]);
+  const [coordenadores, setCoordenadores] = useState([
+
+
+    {
+      nome: 'Carlos Santos',
+      codigoCoordenador: 'COORD001',
+      nivelAcesso: 'Administrador',
+      telefone: '81999887766',
+      email: 'carlos.santos@email.com',
+      status: 'Ativo',
+      endereco: 'Rua Central, 45',
+      dataContratacao: '2020-05-10',
+    },
+    {
+      nome: 'Luciana Mendes',
+      codigoCoordenador: 'COORD002',
+      nivelAcesso: 'Usuário',
+      telefone: '81988776655',
+      email: 'luciana.mendes@email.com',
+      status: 'Ativo',
+      endereco: 'Avenida Brasil, 123',
+      dataContratacao: '2021-03-15',
+    },
+    {
+      nome: 'Renato Oliveira',
+      codigoCoordenador: 'COORD003',
+      nivelAcesso: 'Usuário',
+      telefone: '81977665544',
+      email: 'renato.oliveira@email.com',
+      status: 'Ativo',
+      endereco: 'Rua da Paz, 678',
+      dataContratacao: '2022-01-20',
+    },
+    {
+      nome: 'Fernanda Souza',
+      codigoCoordenador: 'COORD004',
+      nivelAcesso: 'Administrador',
+      telefone: '81966554433',
+      email: 'fernanda.souza@email.com',
+      status: 'Ativo',
+      endereco: 'Praça dos Coqueiros, 789',
+      dataContratacao: '2019-08-25',
+    },
+    {
+      nome: 'André Lima',
+      codigoCoordenador: 'COORD005',
+      nivelAcesso: 'Usuário',
+      telefone: '81955443322',
+      email: 'andre.lima@email.com',
+      status: 'Ativo',
+      endereco: 'Rua Esperança, 404',
+      dataContratacao: '2023-02-01',
+    },
+
+
+  ]);
 
   // Função para carregar coordenadores da API
   const fetchCoordenadores = async () => {

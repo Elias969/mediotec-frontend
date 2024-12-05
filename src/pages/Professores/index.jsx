@@ -16,7 +16,64 @@ const Index = () => {
     endereco: ''
   });
 
-  const [teachers, setTeachers] = useState([]);
+  const [teachers, setTeachers] = useState([
+
+
+
+    {
+      nome: 'Marcos Pereira',
+      dataNasc: '1980-04-15',
+      telefone: '81988776655',
+      email: 'marcos.pereira@email.com',
+      matricula: 'PROF001',
+      status: 'Ativo',
+      disciplinas: ['Matemática', 'Física'],
+      endereco: 'Rua da Alegria, 100',
+    },
+    {
+      nome: 'Cláudia Silva',
+      dataNasc: '1985-10-23',
+      telefone: '81999887766',
+      email: 'claudia.silva@email.com',
+      matricula: 'PROF002',
+      status: 'Ativo',
+      disciplinas: ['Português', 'Literatura'],
+      endereco: 'Avenida das Palmeiras, 45',
+    },
+    {
+      nome: 'Fernando Almeida',
+      dataNasc: '1978-06-30',
+      telefone: '81977665544',
+      email: 'fernando.almeida@email.com',
+      matricula: 'PROF003',
+      status: 'Ativo',
+      disciplinas: ['História', 'Geografia'],
+      endereco: 'Rua das Rosas, 250',
+    },
+    {
+      nome: 'Patrícia Lima',
+      dataNasc: '1990-01-12',
+      telefone: '81966554433',
+      email: 'patricia.lima@email.com',
+      matricula: 'PROF004',
+      status: 'Ativo',
+      disciplinas: ['Biologia', 'Ciências'],
+      endereco: 'Rua Central, 12',
+    },
+    {
+      nome: 'Eduardo Souza',
+      dataNasc: '1982-09-18',
+      telefone: '81955443322',
+      email: 'eduardo.souza@email.com',
+      matricula: 'PROF005',
+      status: 'Ativo',
+      disciplinas: ['Educação Física'],
+      endereco: 'Praça das Acácias, 789',
+    },
+
+
+
+  ]);
 
   // Função para carregar professores da API
   const fetchTeachers = async () => {
