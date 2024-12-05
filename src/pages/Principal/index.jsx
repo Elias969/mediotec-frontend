@@ -20,7 +20,17 @@ const Index = () => {
     disciplinas: []
   });
 
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState([
+    { id: 1, name: "Alice", class: "A1", age: 16 },
+    { id: 2, name: "Bruno", class: "B2", age: 17 },
+    { id: 3, name: "Carla", class: "C3", age: 15 },
+    { id: 4, name: "Diego", class: "A1", age: 16 },
+    { id: 5, name: "Elaine", class: "B2", age: 17 },
+    { id: 6, name: "Felipe", class: "C3", age: 15 },
+    { id: 7, name: "Gabriela", class: "A1", age: 16 },
+    { id: 8, name: "Henrique", class: "B2", age: 17 },
+    { id: 9, name: "Isabela", class: "C3", age: 15 },
+  ]);
 
   // Função para carregar alunos da API
   const fetchStudents = async () => {
