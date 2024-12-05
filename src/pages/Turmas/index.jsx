@@ -13,7 +13,43 @@ const Turmas = () => {
   numerodealunos: '', 
 });
 
-  const [turmas, setTurmas] = useState([]);
+  const [turmas, setTurmas] = useState([
+
+
+
+    {
+      nome: '1A',
+      nomeProfessor: 'Prof. João Mendes',
+      periodo: 'Matutino',
+      numerodealunos: 25,
+    },
+    {
+      nome: '2B',
+      nomeProfessor: 'Profª. Mariana Alves',
+      periodo: 'Vespertino',
+      numerodealunos: 20,
+    },
+    {
+      nome: '1B',
+      nomeProfessor: 'Prof. Ricardo Lima',
+      periodo: 'Matutino',
+      numerodealunos: 22,
+    },
+    {
+      nome: '3A',
+      nomeProfessor: 'Profª. Juliana Santos',
+      periodo: 'Noturno',
+      numerodealunos: 18,
+    },
+    {
+      nome: '1C',
+      nomeProfessor: 'Prof. André Pereira',
+      periodo: 'Matutino',
+      numerodealunos: 30,
+    },
+
+
+  ]);
 
   // Função para carregar as turmas da API
   const fetchTurmas = async () => {

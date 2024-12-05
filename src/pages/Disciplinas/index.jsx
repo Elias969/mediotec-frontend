@@ -13,7 +13,46 @@ const Disciplina = () => {
     status: 'Ativo',
   });
 
-  const [disciplinas, setDisciplinas] = useState([]);
+  const [disciplinas, setDisciplinas] = useState([
+
+
+    {
+      nome: 'Matemática',
+      codigo: 'MAT101',
+      professor: 'Prof. João Mendes',
+      horario: 'Segunda, 08:00 - 09:30',
+      status: 'Ativo',
+    },
+    {
+      nome: 'Português',
+      codigo: 'POR102',
+      professor: 'Profª. Ana Oliveira',
+      horario: 'Terça, 10:00 - 11:30',
+      status: 'Ativo',
+    },
+    {
+      nome: 'História',
+      codigo: 'HIS103',
+      professor: 'Prof. Ricardo Lima',
+      horario: 'Quarta, 08:00 - 09:30',
+      status: 'Ativo',
+    },
+    {
+      nome: 'Inglês',
+      codigo: 'ING104',
+      professor: 'Profª. Juliana Santos',
+      horario: 'Quinta, 10:00 - 11:30',
+      status: 'Ativo',
+    },
+    {
+      nome: 'Física',
+      codigo: 'FIS105',
+      professor: 'Prof. André Pereira',
+      horario: 'Sexta, 09:00 - 10:30',
+      status: 'Ativo',
+    },
+  
+  ]);
 
   const fetchDisciplinas = async () => {
     try {
