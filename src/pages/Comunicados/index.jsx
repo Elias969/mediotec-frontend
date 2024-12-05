@@ -13,7 +13,44 @@ const ComunicadosScreen = () => {
     status: 'Publicado',
   });
 
-  const [comunicados, setComunicados] = useState([]);
+  const [comunicados, setComunicados] = useState([
+
+    {
+      titulo: 'Reunião de Pais e Mestres',
+      descricao: 'A reunião de pais e mestres será realizada no dia 15 de março, às 18h, na sala de reuniões.',
+      dataPublicacao: '2024-03-01',
+      status: 'Publicado',
+    },
+    {
+      titulo: 'Feriado Escolar',
+      descricao: 'Informamos que no dia 25 de março será feriado municipal, portanto, não haverá aula.',
+      dataPublicacao: '2024-03-10',
+      status: 'Publicado',
+    },
+    {
+      titulo: 'Semana de Provas',
+      descricao: 'A semana de provas começará no dia 5 de abril. Confira o cronograma no mural da escola.',
+      dataPublicacao: '2024-03-20',
+      status: 'Publicado',
+    },
+    {
+      titulo: 'Entrega de Boletins',
+      descricao: 'A entrega dos boletins será no dia 20 de abril, na secretaria da escola, das 8h às 17h.',
+      dataPublicacao: '2024-03-25',
+      status: 'Publicado',
+    },
+    {
+      titulo: 'Campanha de Vacinação',
+      descricao: 'No dia 10 de abril, haverá uma campanha de vacinação contra a gripe no pátio da escola.',
+      dataPublicacao: '2024-04-01',
+      status: 'Publicado',
+    },
+
+
+
+
+
+  ]);
 
   const fetchComunicados = async () => {
     try {
