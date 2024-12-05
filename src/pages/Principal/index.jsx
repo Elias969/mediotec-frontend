@@ -21,16 +21,29 @@ const Index = () => {
   });
 
   const [students, setStudents] = useState([
-    { id: 1, name: "Alice", class: "A1", age: 16 },
-    { id: 2, name: "Bruno", class: "B2", age: 17 },
-    { id: 3, name: "Carla", class: "C3", age: 15 },
-    { id: 4, name: "Diego", class: "A1", age: 16 },
-    { id: 5, name: "Elaine", class: "B2", age: 17 },
-    { id: 6, name: "Felipe", class: "C3", age: 15 },
-    { id: 7, name: "Gabriela", class: "A1", age: 16 },
-    { id: 8, name: "Henrique", class: "B2", age: 17 },
-    { id: 9, name: "Isabela", class: "C3", age: 15 },
-  ]);
+    {
+      nome: 'João Silva',
+      dataNasc: '2005-06-15',
+      telefone: '81988889999',
+      turma: '1A',
+      email: 'joao.silva@email.com',
+      matricula: '20231001',
+      status: 'Ativo',
+      endereco: 'Rua das Flores, 123',
+      disciplinas: ['Matemática', 'Português'],
+    },
+    {
+      nome: 'Maria Souza',
+      dataNasc: '2004-09-10',
+      telefone: '81999998888',
+      turma: '2B',
+      email: 'maria.souza@email.com',
+      matricula: '20232002',
+      status: 'Inativo',
+      endereco: 'Avenida Brasil, 456',
+      disciplinas: ['História', 'Geografia'],
+    },
+  ])
 
   // Função para carregar alunos da API
   const fetchStudents = async () => {
