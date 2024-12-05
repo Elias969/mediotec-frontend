@@ -140,8 +140,10 @@ const Index = () => {
       matricula: '',
       status: 'Ativo',
       endereco: '',
-      disciplinas: []
+      disciplinas: [1, 2, 3, 4, 5]
     });
+
+    
     setIsAddModalOpen(true);
   };
 
